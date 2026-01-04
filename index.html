@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEBAB.POINT - Cita Rasa Kebab Autentik</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --secondary: #c0392b;
+            --dark: #2c3e50;
+            --light: #f4f4f4;
+            --accent: #f1c40f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #fff; color: #333; line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navbar */
+        .navbar { background: #fff; padding: 10px 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        
+        .logo-wrapper { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { 
+            background: var(--secondary); 
+            color: white; 
+            width: 45px; 
+            height: 45px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 12px; 
+            overflow: hidden;
+        }
+        .logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .logo-text { font-size: 22px; font-weight: 800; color: var(--dark); letter-spacing: -1px; }
+        .logo-text span { color: var(--secondary); }
+
+        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero */
+        .hero { height: 60vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200'); background-size: cover; background-position: center; display: flex; align-items: center; color: white; text-align: center; margin-top: 60px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; }
+        .cta-button { background: var(--primary); color: white; padding: 15px 35px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; transition: 0.3s; }
+
+        /* Menu Section */
+        .section-padding { padding: 60px 0; }
+        .section-title { text-align: center; margin-bottom: 40px; font-size: 2.5rem; position: relative; padding-bottom: 10px; }
+        .section-title::after { content: ''; width: 60px; height: 4px; background: var(--primary); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+
+        .category-title { background: var(--dark); color: white; padding: 10px 20px; display: inline-block; border-radius: 5px; margin-bottom: 25px; margin-top: 20px; }
+
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .menu-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; border: 1px solid #eee; }
+        .menu-card:hover { transform: translateY(-5px); }
+        .menu-card img { width: 100%; height: 180px; object-fit: cover; }
+        .card-content { padding: 15px; text-align: center; }
+        .card-content h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .price { display: block; margin-bottom: 15px; font-size: 1.2rem; font-weight: bold; color: var(--secondary); }
+        .order-button { display: block; background: var(--primary); color: white; padding: 8px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s; }
+        .order-button:hover { background: var(--secondary); }
+
+        /* Galeri */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .gallery-item { height: 200px; border-radius: 10px; overflow: hidden; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Newsletter */
+        .newsletter { background: var(--dark); color: white; padding: 60px 0; text-align: center; }
+        .newsletter-form { margin-top: 25px; }
+        .newsletter-form input { padding: 12px 20px; width: 300px; border-radius: 30px; border: none; outline: none; }
+        .newsletter-form button { padding: 12px 25px; background: var(--primary); color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; margin-left: 10px; }
+
+        /* Footer */
+        footer { background: #1a252f; color: white; padding: 50px 0 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .live-chat { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .newsletter-form input { width: 100%; margin-bottom: 10px; }
+            .newsletter-form button { margin-left: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo-wrapper">
+                <div class="logo-icon">
+                    <img src="https://via.placeholder.com/100x100?text=K" alt="Logo">
+                </div>
+                <div class="logo-text">KEBAB<span>.POINT</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="container">
+            <h1>Menu Spesial Kebab Point</h1>
+            <p>Lezat, Higienis, dan Terjangkau.</p>
+            <a href="#menu" class="cta-button">LIHAT DAFTAR HARGA</a>
+        </div>
+    </header>
+
+    <section id="menu" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Daftar Menu Kami</h2>
+
+            <h3 class="category-title"><i class="fas fa-bread-slice"></i> Varian Kebab</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400" alt="Kebab Ori">
+                    <div class="card-content">
+                        <h3>Kebab Ori</h3>
+                        <span class="price">Rp 13.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Kebab%20Ori" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400" alt="Kebab Extra">
+                    <div class="card-content">
+                        <h3>Kebab Extra</h3>
+                        <span class="price">Rp 16.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Kebab%20Extra" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1561651823-34fed022540e?w=400" alt="Kebab Super Extra">
+                    <div class="card-content">
+                        <h3>Kebab Super Extra</h3>
+                        <span class="price">Rp 22.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Kebab%20Super%20Extra" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1524351199679-46cddfdb50c7?w=400" alt="Kebab Sayur">
+                    <div class="card-content">
+                        <h3>Kebab Sayur</h3>
+                        <span class="price">Rp 11.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Kebab%20Sayur" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1524351199679-46cddfdb50c7?w=400" alt="Kebab Telur Sayur">
+                    <div class="card-content">
+                        <h3>Kebab Telur Sayur</h3>
+                        <span class="price">Rp 11.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Kebab%20Telur%20Sayur" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-title"><i class="fas fa-hamburger"></i> Varian Burger</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400" alt="Burger Slice">
+                    <div class="card-content">
+                        <h3>Burger Slice</h3>
+                        <span class="price">Rp 10.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Burger%20Slice" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400" alt="Burger Slice Keju">
+                    <div class="card-content">
+                        <h3>Burger Slice Keju</h3>
+                        <span class="price">Rp 14.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Burger%20Slice%20Keju" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400" alt="Burger Petty Besar">
+                    <div class="card-content">
+                        <h3>Burger Petty Besar</h3>
+                        <span class="price">Rp 15.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Burger%20Petty%20Besar" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400" alt="Burger Petty Besar Keju">
+                    <div class="card-content">
+                        <h3>Burger Petty Besar Keju</h3>
+                        <span class="price">Rp 18.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Burger%20Petty%20Besar%20Keju" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-title"><i class="fas fa-glass-whiskey"></i> Minuman Segar</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400" alt="Es Teh">
+                    <div class="card-content">
+                        <h3>Es Teh</h3>
+                        <span class="price">Rp 5.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Es%20Teh" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400" alt="Es Jeruk">
+                    <div class="card-content">
+                        <h3>Es Jeruk</h3>
+                        <span class="price">Rp 6.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Es%20Jeruk" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400" alt="Es Bubuk Varian">
+                    <div class="card-content">
+                        <h3>Es Bubuk (Macam Varian)</h3>
+                        <span class="price">Rp 10.000</span>
+                        <a href="https://wa.me/6287763793661?text=Saya%20mau%20pesan%20Es%20Bubuk%20Varian" class="order-button">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeri" class="section-padding" style="background: #fafafa;">
+        <div class="container">
+            <h2 class="section-title">Suasana Kebab Point</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1561651823-34fed022540e?w=400" alt="Galeri 1"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1524351199679-46cddfdb50c7?w=400" alt="Galeri 2"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400" alt="Galeri 3"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1623156346149-d5bc8bd29f98?w=400" alt="Galeri 4"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontak">
+        <div class="container footer-grid">
+            <div>
+                <h3>KEBAB.POINT</h3>
+                <p>Balikpapan Selatan, Indonesia</p>
+                <p>Buka: 10:00 - 22:00 WITA</p>
+            </div>
+            <div>
+                <h3>Social Media</h3>
+                <a href="https://www.instagram.com/point.kebab/" style="color:white; text-decoration:none;"><i class="fab fa-instagram"></i> @point.kebab</a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6287763793661" class="live-chat" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
